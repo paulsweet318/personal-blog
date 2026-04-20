@@ -32,13 +32,3 @@
 项目处于规划完成、准备进入开发的阶段。
 
 下一步会基于技术设计初始化 Astro 项目，实现文章目录、照片页、关于页和基础双语路由。
-
-## GitHub 学习目标
-
-这个项目也会作为 Git 和 GitHub 的练习项目，用来熟悉：
-
-- commit 和 push
-- issue 管理
-- branch 和 Pull Request
-- GitHub Actions
-- GitHub Pages 发布流程
