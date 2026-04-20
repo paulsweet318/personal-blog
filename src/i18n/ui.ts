@@ -9,7 +9,7 @@ export const defaultLang: Lang = 'zh';
 
 export const ui = {
   zh: {
-    siteTitle: 'Personal Blog',
+    siteTitle: "Mo's Corner",
     posts: '文章',
     photos: '照片',
     about: '关于',
@@ -20,7 +20,7 @@ export const ui = {
     noPhotos: '还没有照片记录。',
   },
   en: {
-    siteTitle: 'Personal Blog',
+    siteTitle: "Mo's Corner",
     posts: 'Posts',
     photos: 'Photos',
     about: 'About',

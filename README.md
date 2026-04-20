@@ -1,4 +1,4 @@
-# Personal Blog
+# Mo's Corner
 
 一个用于记录生活的个人博客项目。
 
