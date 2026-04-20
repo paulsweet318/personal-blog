@@ -112,7 +112,7 @@
 title
 date
 lang
-slug
+urlSlug
 draft
 description
 tags
@@ -124,7 +124,7 @@ translationKey
 - `title`：标题
 - `date`：发布日期
 - `lang`：内容语言，例如 `zh` 或 `en`
-- `slug`：URL 使用的稳定英文标识
+- `urlSlug`：URL 使用的稳定英文标识
 - `draft`：是否草稿
 - `description`：列表页和 SEO 使用的摘要
 - `tags`：标签，可选
@@ -140,7 +140,7 @@ translationKey
 title
 date
 lang
-slug
+urlSlug
 draft
 description
 images
@@ -153,7 +153,7 @@ translationKey
 - `title`：照片记录标题，可简短
 - `date`：记录日期
 - `lang`：内容语言，例如 `zh` 或 `en`
-- `slug`：稳定英文标识
+- `urlSlug`：稳定英文标识
 - `draft`：是否草稿
 - `description`：照片描述
 - `images`：图片路径列表
@@ -232,7 +232,7 @@ font-family:
 
 ```text
 新建 Markdown 内容文件
-填写标题、日期、语言、slug 等信息
+填写标题、日期、语言、urlSlug 等信息
 写正文或照片描述
 添加图片文件
 本地预览

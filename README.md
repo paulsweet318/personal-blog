@@ -26,9 +26,10 @@
 
 - [PRD](docs/prd.md)
 - [Technical Design](docs/technical-design.md)
+- [Publishing Guide](docs/publishing-guide.md)
 
 ## 当前状态
 
-项目处于规划完成、准备进入开发的阶段。
+第一版已经上线到 GitHub Pages。
 
-下一步会基于技术设计初始化 Astro 项目，实现文章目录、照片页、关于页和基础双语路由。
+发布地址：[https://paulsweet318.github.io/personal-blog/](https://paulsweet318.github.io/personal-blog/)

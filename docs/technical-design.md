@@ -2,7 +2,7 @@
 
 状态：Draft v0.1
 
-关联文档：[PRD](./prd.md)
+关联文档：[PRD](./prd.md)、[Publishing Guide](./publishing-guide.md)
 
 ## 1. 技术目标
 
@@ -140,7 +140,7 @@ GitHub Pages
 title: "一次春天散步"
 date: 2026-04-19
 lang: "zh"
-slug: "spring-walk"
+urlSlug: "spring-walk"
 draft: false
 description: "给文章详情页 SEO 使用的简短描述，首页目录不展示。"
 tags:
@@ -155,7 +155,7 @@ translationKey: "spring-walk"
 - `title`
 - `date`
 - `lang`
-- `slug`
+- `urlSlug`
 - `tags`
 
 文章目录页不读取、不展示：
@@ -176,7 +176,7 @@ translationKey: "spring-walk"
 title: "河边散步"
 date: 2026-04-19
 lang: "zh"
-slug: "river-walk"
+urlSlug: "river-walk"
 draft: false
 description: "下午沿着河边走了一段，风很轻。"
 location: "Chicago"
@@ -216,7 +216,7 @@ src/content/photos/zh/2026-04-19-river-walk.md
 src/content/photos/en/2026-04-19-river-walk.md
 ```
 
-文件名用于人工识别，实际 URL 使用 frontmatter 中的 `slug`。
+文件名用于人工识别，实际 URL 使用 frontmatter 中的 `urlSlug`。
 
 这样后续 Obsidian 或自动化导入可以按日期生成文件，不依赖 Astro 内部路由规则。
 
@@ -532,6 +532,8 @@ public/CNAME
 ```
 
 ## 13. 内容编辑流程
+
+日常操作以 [Publishing Guide](./publishing-guide.md) 为准。本节只保留技术流程概览。
 
 ### 13.1 新增文章
 

@@ -2,6 +2,7 @@
 import type { PhotoEntry } from '../lib/content';
 import type { Lang } from '../i18n/ui';
 import DateText from './DateText.astro';
+import { withBase } from '../i18n/routes';
 
 interface Props {
   photos: PhotoEntry[];
@@ -9,6 +10,14 @@ interface Props {
 }
 
 const { photos, lang } = Astro.props;
+
+function imageSrc(src: string): string {
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
+    return src;
+  }
+
+  return withBase(src);
+}
 ---
 
 <div class="photo-timeline">
@@ -18,7 +27,7 @@ const { photos, lang } = Astro.props;
         <div class="photo-grid" aria-label={photo.data.title}>
           {photo.data.images.map((image) => (
             <img
-              src={image.src}
+              src={imageSrc(image.src)}
               alt={image.alt}
               width={image.width}
               height={image.height}
