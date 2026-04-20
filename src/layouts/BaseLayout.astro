@@ -1,5 +1,6 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
+import { withBase } from '../i18n/routes';
 import type { Lang } from '../i18n/ui';
 import { ui } from '../i18n/ui';
 import '../styles/global.css';
@@ -8,10 +9,11 @@ interface Props {
   title?: string;
   description?: string;
   lang: Lang;
+  noindex?: boolean;
   section?: 'posts' | 'photos' | 'about';
 }
 
-const { title, description, lang, section = 'posts' } = Astro.props;
+const { title, description, lang, noindex = false, section = 'posts' } = Astro.props;
 const text = ui[lang];
 const pageTitle = title ? `${title} | ${text.siteTitle}` : text.siteTitle;
 ---
@@ -22,6 +24,8 @@ const pageTitle = title ? `${title} | ${text.siteTitle}` : text.siteTitle;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description ?? 'A quiet personal blog for writing and photos.'} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <title>{pageTitle}</title>
   </head>
   <body>

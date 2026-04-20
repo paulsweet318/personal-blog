@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#5d6b9f"/>
+  <text x="600" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="76" fill="#ffffff">3:2</text>
+  <text x="600" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" fill="#ffffff">1200 x 800</text>
+</svg>

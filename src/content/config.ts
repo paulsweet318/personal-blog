@@ -31,6 +31,8 @@ const photos = defineCollection({
         z.object({
           src: z.string(),
           alt: z.string(),
+          width: z.number().positive().optional(),
+          height: z.number().positive().optional(),
         }),
       )
       .min(1),
