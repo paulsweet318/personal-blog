@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PhotoTimeline from '../../components/PhotoTimeline.astro';
+import { getPhotos } from '../../lib/content';
+import { ui } from '../../i18n/ui';
+
+const lang = 'en';
+const photos = await getPhotos(lang);
+const text = ui[lang];
+---
+
+<BaseLayout lang={lang} section="photos" title={text.latestPhotos}>
+  <section class="section-heading">
+    <h1>{text.latestPhotos}</h1>
+  </section>
+  {photos.length > 0 ? <PhotoTimeline photos={photos} lang={lang} /> : <p class="empty-state">{text.noPhotos}</p>}
+</BaseLayout>

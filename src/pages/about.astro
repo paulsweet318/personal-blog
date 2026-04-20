@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPage } from '../lib/content';
+
+const lang = 'zh';
+const page = await getPage(lang, '关于');
+const Content = page ? (await page.render()).Content : undefined;
+---
+
+<BaseLayout lang={lang} section="about" title={page?.data.title ?? '关于'} description={page?.data.description}>
+  <article class="prose">
+    {Content ? <Content /> : <p>还没有关于页面内容。</p>}
+  </article>
+</BaseLayout>

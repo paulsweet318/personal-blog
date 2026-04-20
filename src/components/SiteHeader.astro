@@ -1,0 +1,25 @@
+---
+import { localePath, withBase } from '../i18n/routes';
+import type { Lang } from '../i18n/ui';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  section: 'posts' | 'photos' | 'about';
+}
+
+const { lang, section } = Astro.props;
+const text = ui[lang];
+const otherLang = lang === 'zh' ? 'en' : 'zh';
+const languageHref = section === 'posts' ? localePath(otherLang) : localePath(otherLang, section === 'photos' ? '/photos/' : '/about/');
+---
+
+<header class="site-header">
+  <a class="site-title" href={withBase('/')}>{text.siteTitle}</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class:list={{ active: section === 'posts' }} href={localePath(lang)}>{text.posts}</a>
+    <a class:list={{ active: section === 'photos' }} href={localePath(lang, '/photos/')}>{text.photos}</a>
+    <a class:list={{ active: section === 'about' }} href={localePath(lang, '/about/')}>{text.about}</a>
+    <a href={languageHref}>{text.language}</a>
+  </nav>
+</header>

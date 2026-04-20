@@ -1,0 +1,29 @@
+---
+import type { PostEntry } from '../lib/content';
+import type { Lang } from '../i18n/ui';
+import DateText from './DateText.astro';
+import { postPath } from '../i18n/routes';
+
+interface Props {
+  posts: PostEntry[];
+  lang: Lang;
+}
+
+const { posts, lang } = Astro.props;
+---
+
+<ol class="post-directory">
+  {
+    posts.map((post) => (
+      <li>
+        <a href={postPath(lang, post.data.urlSlug)}>
+          <span class="post-title">{post.data.title}</span>
+          <span class="post-meta">
+            <DateText date={post.data.date} lang={lang} />
+            {post.data.tags.length > 0 && <span>{post.data.tags.join(' / ')}</span>}
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ol>

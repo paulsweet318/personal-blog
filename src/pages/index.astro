@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostDirectory from '../components/PostDirectory.astro';
+import { getPosts } from '../lib/content';
+import { ui } from '../i18n/ui';
+
+const lang = 'zh';
+const posts = await getPosts(lang);
+const text = ui[lang];
+---
+
+<BaseLayout lang={lang} section="posts" title={text.latestPosts}>
+  <section class="section-heading">
+    <h1>{text.latestPosts}</h1>
+  </section>
+  {posts.length > 0 ? <PostDirectory posts={posts} lang={lang} /> : <p class="empty-state">{text.noPosts}</p>}
+</BaseLayout>
