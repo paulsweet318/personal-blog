@@ -4,6 +4,7 @@
   --color-muted: #6e6e73;
   --color-border: #d2d2d7;
   --color-link: #0057b8;
+  --color-brand: #c54282;
   --content-width: 680px;
   --wide-width: 960px;
 }
@@ -59,9 +60,14 @@ a:hover {
 }
 
 .site-title {
+  color: var(--color-brand);
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+}
+
+.site-title:hover {
+  color: var(--color-brand);
 }
 
 .site-nav {
