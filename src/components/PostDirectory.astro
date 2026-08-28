@@ -15,7 +15,7 @@ const { posts, lang } = Astro.props;
 <ol class="post-directory">
   {
     posts.map((post) => (
-      <li>
+      <li data-post-date={post.data.date.toISOString().slice(0, 10)}>
         <a href={postPath(lang, post.data.urlSlug)}>
           <span class="post-title">{post.data.title}</span>
           <span class="post-meta">

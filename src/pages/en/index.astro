@@ -2,16 +2,40 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostDirectory from '../../components/PostDirectory.astro';
 import { getPosts } from '../../lib/content';
+import { getPhotos } from '../../lib/content';
+import ActivityHeatmap from '../../components/ActivityHeatmap.astro';
 import { ui } from '../../i18n/ui';
 
 const lang = 'en';
 const posts = await getPosts(lang);
+const photos = await getPhotos(lang);
+const activities = [...posts, ...photos].map((entry) => ({ date: entry.data.date }));
 const text = ui[lang];
 ---
 
 <BaseLayout lang={lang} section="posts" title={text.latestPosts}>
+  <ActivityHeatmap activities={activities} lang={lang} />
   <section class="section-heading">
     <h1>{text.latestPosts}</h1>
   </section>
   {posts.length > 0 ? <PostDirectory posts={posts} lang={lang} /> : <p class="empty-state">{text.noPosts}</p>}
+  <p class="activity-filter-status" data-filter-status hidden>
+    <span data-filter-label></span>
+    <a href="/personal-blog/en/">Clear filter</a>
+  </p>
 </BaseLayout>
+
+<script>
+  const date = new URLSearchParams(window.location.search).get('date');
+  if (date) {
+    document.querySelectorAll('[data-post-date]').forEach((post) => {
+      post.toggleAttribute('hidden', post.getAttribute('data-post-date') !== date);
+    });
+    const status = document.querySelector('[data-filter-status]');
+    const label = document.querySelector('[data-filter-label]');
+    if (status && label) {
+      label.textContent = `Showing posts from ${date}`;
+      status.removeAttribute('hidden');
+    }
+  }
+</script>
