@@ -207,10 +207,6 @@ a.activity-day:hover {
   margin-top: 12px;
 }
 
-.activity-legend span {
-  margin-right: 3px;
-}
-
 .activity-filter-status {
   color: var(--color-muted);
   font-size: 0.82rem;
