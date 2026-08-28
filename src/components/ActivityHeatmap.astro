@@ -12,14 +12,14 @@ interface Props {
 }
 
 const { activities, lang } = Astro.props;
-const latest = activities.reduce((value, item) => Math.max(value, item.date.getTime()), 0);
-const year = latest ? new Date(latest).getFullYear() : new Date().getFullYear();
-const start = new Date(year, 0, 1);
-const end = new Date(year, 11, 31);
+const end = new Date();
+end.setHours(23, 59, 59, 999);
+const start = new Date(end);
+start.setDate(start.getDate() - 364);
 const counts = new Map<string, number>();
 
 function key(date: Date): string {
-  return date.toISOString().slice(0, 10);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
 
 for (const activity of activities) {
@@ -33,16 +33,16 @@ lastSaturday.setDate(end.getDate() + (6 - end.getDay()));
 const days: Array<{ date: Date; count: number; inYear: boolean }> = [];
 for (const cursor = new Date(firstSunday); cursor <= lastSaturday; cursor.setDate(cursor.getDate() + 1)) {
   const date = new Date(cursor);
-  days.push({ date, count: counts.get(key(date)) ?? 0, inYear: date.getFullYear() === year });
+  days.push({ date, count: counts.get(key(date)) ?? 0, inYear: date >= start && date <= end });
 }
 
 const maxCount = Math.max(...days.map((day) => day.count), 1);
 const weeks = Array.from({ length: Math.ceil(days.length / 7) }, (_, index) => days.slice(index * 7, index * 7 + 7));
 const monthLabels = weeks
   .map((week, index) => ({ label: week[0]?.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { month: 'short' }), index }))
-  .filter(({ index }) => weeks[index][0].date.getFullYear() === year && (index === 0 || weeks[index - 1][0].date.getMonth() !== weeks[index][0].date.getMonth()));
+  .filter(({ index }) => weeks[index].some((day) => day.inYear) && (index === 0 || weeks[index - 1][0].date.getMonth() !== weeks[index][0].date.getMonth()));
 const weekdayLabels = lang === 'zh' ? ['日', '一', '二', '三', '四', '五', '六'] : ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const heading = lang === 'zh' ? `${year} 年活动` : `${year} activity`;
+const heading = lang === 'zh' ? '过去一年活动' : 'Activity over the past year';
 const emptyLabel = lang === 'zh' ? '没有记录' : 'No activity';
 const countLabel = lang === 'zh' ? '条记录' : 'entries';
 ---
@@ -67,7 +67,7 @@ const countLabel = lang === 'zh' ? '条记录' : 'entries';
               {week.map(({ date, count, inYear }) => {
                 const level = count === 0 ? 0 : Math.min(4, Math.ceil((count / maxCount) * 4));
                 const label = count === 0 ? emptyLabel : `${count} ${countLabel}`;
-                return <a class:list={{ 'activity-day': true, [`activity-level-${level}`]: true, 'activity-outside': !inYear }} href={`?date=${key(date)}`} title={`${date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}: ${label}`} aria-label={`${date.toISOString().slice(0, 10)}: ${label}`}></a>;
+                return <a class:list={{ 'activity-day': true, [`activity-level-${level}`]: true, 'activity-outside': !inYear }} href={`?date=${key(date)}`} title={`${date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US')}: ${label}`} aria-label={`${key(date)}: ${label}`}></a>;
               })}
             </div>
           ))}

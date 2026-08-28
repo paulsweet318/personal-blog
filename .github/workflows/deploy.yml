@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
+  schedule:
+    # 16:05 UTC = 00:05 Asia/Shanghai every day.
+    - cron: '5 16 * * *'
   workflow_dispatch:
+
+env:
+  TZ: Asia/Shanghai
 
 permissions:
   contents: read
